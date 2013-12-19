@@ -45,7 +45,7 @@ Vagrant.configure('2') do |config|
   config.vm.box = 'opscode-ubuntu-12.04'
   config.vm.box_url = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box'
   
-  config.vm.network 'private_network', ip: '10.1.2.30'
+  config.vm.network 'private_network', ip: '10.1.2.0'
   
   
   # virtualbox provider
@@ -55,21 +55,26 @@ Vagrant.configure('2') do |config|
       vb.customize ['modifyvm', :id, '--memory', 1024]
   end
   
-  # chef provision
   config.vm.provision :chef_solo do |chef|
     chef.log_level = :debug
 
     chef.data_bags_path = "#{confucius_root}/data_bags"
 
     chef.json = {
-        :balanced_env => 'vagrant',
-        :message_broker => '10.0.2.2',
+        :chompy_app => {
+            :env => chef.environment,
+            :message_broker => '10.0.2.2',
+            :db_server => '10.0.2.2',
+            :db_search => 'role:database-master',
+            :mailgun => {
+                :username => 'USERNAME',
+                :password => 'PASSWORD'
+            },
+        },
         :citadel => {
             'newrelic/license_key' => nil,
-            'access_key_id' => default[:aws_access_key_id],
-            'secret_access_key' => default[:aws_secret_access_key],
-            'balanced_proxy/ssl.crt' => nil,
-            'balanced_proxy/ssl.key' => nil
+            'access_key_id' => default[:access_key_id],
+            'secret_access_key' => default[:secret_access_key]
         }
     }
     

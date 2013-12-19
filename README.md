@@ -1,7 +1,7 @@
-role-balanced-proxy
+role-balanced-chompy
 ===================
 
-Role for proxy-ing balanced api request.
+Role for chompy-ing balanced api request.
 
 Setup
 =====
@@ -13,9 +13,9 @@ $ cd ~/code/bp/chef
 $ echo $CONFUCIUS_ROOT
 /code/bp/chef/confucius
 $ cd cookbooks
-$ git clone git@github.com:balanced-cookbooks/role-balanced-proxy.git
+$ git clone git@github.com:balanced-cookbooks/role-balanced-chompy.git
 ...
-$ cd role-balanced-proxy
+$ cd role-balanced-chompy
 ```
 
 Testing
@@ -45,8 +45,8 @@ $ knife ec2 server create \
 --availability-zone us-west-1a \
 --subnet subnet-5d3c681b \
 --region us-west-1 \
---iam-profile balanced-proxy \
---run-list "role[balanced-proxy]" \
+--iam-profile balanced-chompy \
+--run-list "role[balanced-chompy]" \
 --ssh-user ubuntu \
 --server-connect-attribute private_ip_address \
 --ssh-port 22 \
