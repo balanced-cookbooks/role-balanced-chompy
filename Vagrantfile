@@ -19,8 +19,10 @@ default = {
   :project => File.basename(Dir.getwd),
 
   # AWS stuff
-  :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+  :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+  :aws_keypair => ENV['AWS_KEYPAIR'],
+  :aws_private_key => ENV['EC2_PRIVATE_KEY']
 }
 
 VM_NODENAME = "vagrant-#{default[:user]}-#{default[:project]}"
@@ -43,8 +45,10 @@ Vagrant.configure('2') do |config|
   config.vm.box = 'opscode-ubuntu-12.04'
   config.vm.box_url = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box'
   
-  config.vm.network 'private_network', ip: '10.1.2.15'
+  config.vm.network 'private_network', ip: '10.1.2.0'
   
+  
+  # virtualbox provider
   config.vm.provider :virtualbox do |vb|
 #      vb.gui = true
       vb.customize ['modifyvm', :id, '--cpus', 2]
