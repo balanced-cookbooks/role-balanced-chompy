@@ -1,0 +1,13 @@
+novalidation:
+
+roles:
+  - balanced-chompy:
+
+nodes:
+#  - ec2 3:
+#      run_list: role[balanced-chompy]
+#      options: --image ami-aa4070ef --flavor m1.small --security-group-ids sg-811f08e3 --availability-zone us-west-1a --subnet subnet-5d3c681b --region us-west-1 --iam-profile balanced-chompy --ssh-user ubuntu --server-connect-attribute private_ip_address --ssh-gateway marshall@50.18.199.26 --identity-file ~/.ssh/mj-aws.pem --environment=dev
+
+  - balanced-chompy-test:
+      run_list: role[balanced-chompy]
+      options:  --image=ami-aa4070ef --flavor=m1.small --security-group-ids=sg-cabdafa6 --availability-zone=us-west-1a --subnet=subnet-af832dc6 --region=us-west-1 --iam-profile=balanced-misc-app --ssh-user=ubuntu --server-connect-attribute=private_ip_address --ssh-gateway=marshall@50.18.199.26 --environment=dev -r 'role[balanced-chompy]' -S mjmbpro-july-2013
