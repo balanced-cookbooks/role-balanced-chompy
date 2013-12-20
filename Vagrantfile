@@ -74,7 +74,9 @@ Vagrant.configure('2') do |config|
         :citadel => {
             'newrelic/license_key' => nil,
             'access_key_id' => default[:access_key_id],
-            'secret_access_key' => default[:secret_access_key]
+            'secret_access_key' => default[:secret_access_key],
+            'balanced_misc_app/secret_access_key' => default[:secret_access_key],
+            'mailgun/password' => 'foo'
         }
     }
     

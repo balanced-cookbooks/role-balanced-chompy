@@ -8,3 +8,4 @@ version          '0.1.0'
 
 depends          'balanced-chompy'
 depends          'role-base'
+depends          'balanced-citadel', '~> 1.0.0'
